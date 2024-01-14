@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="pingback" href="https://www.ghostriderjunior.xyz/xmlrpc.php">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <title>Note Details</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #note-details {
+      background-color: #d3d3d3;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #note-details p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="note-details">
+    <h1>Notes</h1>
+
+    <!-- Note details will be displayed here -->
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Extract note ID from the URL
+      const params = new URLSearchParams(window.location.search);
+      const noteId = params.get("id");
+
+      // Reference to the "notes" collection in Firebase
+      const notesCollection = firebase.firestore().collection("notes");
+
+      // Retrieve the note based on the ID
+      notesCollection.doc(noteId).get()
+        .then((doc) => {
+          if (doc.exists) {
+            const noteData = doc.data();
+            displayNoteDetails(noteData);
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting document:", error);
+        });
+
+      // Function to display note details
+      function displayNoteDetails(note) {
+        const noteDetailsContainer = document.getElementById("note-details");
+
+        const nameElement = document.createElement("p");
+        nameElement.textContent = `Name: ${note.name}`;
+
+        const messageElement = document.createElement("p");
+        messageElement.textContent = `Message: ${note.message}`;
+
+        noteDetailsContainer.appendChild(nameElement);
+        noteDetailsContainer.appendChild(messageElement);
+      }
+    });
+  </script>
+</body>
+</html>

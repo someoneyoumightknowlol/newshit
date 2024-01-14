@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="pingback" href="https://www.ghostriderjunior.xyz/xmlrpc.php">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>www.ghostriderjunior.xyz | Join the most advanced motorcycle server.</title>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.28/build/spline-viewer.js"></script>
+  <!-- Add Firebase scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+  <script src="notes.js"></script>
+  <!-- Add your Firebase configuration script here -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Initialize Firebase with your configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDwFeoPO9WIZ0nrg77ViwSeTDIoscTx570",
+        authDomain: "website-3fb87.firebaseapp.com",
+        projectId: "website-3fb87",
+        storageBucket: "website-3fb87.appspot.com",
+        messagingSenderId: "847620349193",
+        appId: "1:847620349193:web:e4b162a3644433b2c747d8",
+        measurementId: "G-RQ7D9ZPKLV"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+    });
+
+    function openPopup() {
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function addNote() {
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+
+      if (name && message) {
+        // Reference to the "notes" collection in Firebase
+        const notesCollection = firebase.firestore().collection("notes");
+
+        // Add the new note to Firebase
+        notesCollection.add({
+          name: name,
+          message: message,
+        })
+        .then((docRef) => {
+          // Redirect to the location of the added note
+          window.location.href = `note.html?id=${docRef.id}`;
+        })
+        .catch(error => console.error("Error adding note:", error));
+      }
+    }
+  </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // ... (your existing initialization code)
+
+    function openPopup() {
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function addNote() {
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+
+      if (name && message) {
+        // Reference to the "notes" collection in Firebase
+        const notesCollection = firebase.firestore().collection("notes");
+
+        // Add the new note to Firebase
+        notesCollection.add({
+          name: name,
+          message: message,
+        })
+        .then((docRef) => {
+          // Redirect to the location of the added note
+          window.location.href = `note.html?id=${docRef.id}`;
+        })
+        .catch(error => console.error("Error adding note:", error));
+      }
+    }
+  });
+</script>
+</head>
+<body>
+  <div class="container">
+    <spline-viewer url="https://prod.spline.design/gVXZM4Safj3v7i6k/scene.splinecode"></spline-viewer>
+
+    <!-- Add Note button -->
+    <button class="add-note-button" onclick="openPopup()"></button>
+
+    <!-- Popup -->
+    <div id="popup">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" required></textarea>
+
+      <button onclick="addNote()">Send</button>
+      <button onclick="closePopup()">Cancel</button>
+    </div>
+
+    <!-- Notes section -->
+    <h2>Notes:</h2>
+    <div id="notes-container">
+      <!-- Notes will be displayed here -->
+    </div>
+    <textarea id="note-input" placeholder="Leave a note..."></textarea>
+    
+    <!-- Discord button -->
+    <button class="discord-button" onclick="window.location.href='discord.html'">Discord</button>
+    <button class="instagram-button" onclick="window.location.href=encodeURI('https://www.instagram.com/ghostriderjunior/')">Instagram</button>
+    <script src="notes.js"></script>
+  </div>
+</body>
+</html>
