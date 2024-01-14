@@ -11,7 +11,6 @@
   <!-- Add Firebase scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
-  <script src="notes.js"></script>
   <!-- Add your Firebase configuration script here -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -57,48 +56,27 @@
         .catch(error => console.error("Error adding note:", error));
       }
     }
+
+    // Hide loading screen after the page has fully loaded
+    setTimeout(function () {
+      document.getElementById("loading-screen").style.display = "none";
+    }, 1000); // 1000 milliseconds (1 second)
   </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // ... (your existing initialization code)
 
-    function openPopup() {
-      document.getElementById('popup').style.display = 'block';
-    }
-
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-    }
-
-    function addNote() {
-      const name = document.getElementById('name').value;
-      const message = document.getElementById('message').value;
-
-      if (name && message) {
-        // Reference to the "notes" collection in Firebase
-        const notesCollection = firebase.firestore().collection("notes");
-
-        // Add the new note to Firebase
-        notesCollection.add({
-          name: name,
-          message: message,
-        })
-        .then((docRef) => {
-          // Redirect to the location of the added note
-          window.location.href = `note.html?id=${docRef.id}`;
-        })
-        .catch(error => console.error("Error adding note:", error));
-      }
-    }
-  });
-</script>
+  <style>
+  </style>
 </head>
 <body>
+  <!-- Loading screen -->
+  <div id="loading-screen">
+    <img src="loading.gif" alt="Loading...">
+  </div>
+
   <div class="container">
     <spline-viewer url="https://prod.spline.design/gVXZM4Safj3v7i6k/scene.splinecode"></spline-viewer>
 
     <!-- Add Note button -->
-    <button class="add-note-button" onclick="openPopup()"></button>
+    <button class="add-note-button" onclick="openPopup()">Add Note</button>
 
     <!-- Popup -->
     <div id="popup">
@@ -121,8 +99,8 @@
     
     <!-- Discord button -->
     <button class="discord-button" onclick="window.location.href='discord.html'">Discord</button>
+    <button class="gay-button" onclick="window.location.href='https://www.discord.gg/ghostrider'">discord.gg/ghostrider</button>
     <button class="instagram-button" onclick="window.location.href=encodeURI('https://www.instagram.com/ghostriderjunior/')">Instagram</button>
-    <script src="notes.js"></script>
   </div>
 </body>
 </html>
