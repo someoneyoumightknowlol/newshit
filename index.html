@@ -7,7 +7,7 @@
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <title>GhostriderJunior</title>
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.34/build/spline-viewer.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.39/build/spline-viewer.js"></script>
   <!-- Add Firebase scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
@@ -25,35 +25,10 @@
         appId: "1:847620349193:web:e4b162a3644433b2c747d8",
         measurementId: "G-RQ7D9ZPKLV"
       };
-  
       firebase.initializeApp(firebaseConfig);
-  
-      // Hide loading screen after the page has fully loaded
-      setTimeout(function () {
-        document.getElementById("loading-overlay").classList.add("hidden");
-  
-        // Show the buttons
-        document.querySelectorAll('.discord-button, .instagram-button, .gay-button').forEach(function (button) {
-          button.style.visibility = 'visible';
-        });
-      }, 3000); // Adjust the delay time as needed
-  
-      // Get the audio element and play button
-      var audio = document.getElementById("myAudio");
-      var playButton = document.getElementById("discord-button");
-  
-      // Add a hover event listener to the play button
-      playButton.addEventListener("mouseenter", function () {
-        // Play the audio
-        audio.play();
-      });
-  
-      // Add a click event listener to stop the audio when clicked (optional)
-      playButton.addEventListener("click", function () {
-        audio.pause();
-        audio.currentTime = 0;
-      });
-  
+      window.addEventListener('load', function() {
+        document.body.style.backgroundColor = 'black';
+    });
     });
   </script>  
 </head>
@@ -64,15 +39,8 @@
     Your browser does not support the audio element.
   </audio>
 
-  <div id="loading-overlay">
-    <div class="loading-spinner"> <!-- Add your loading animation here --> </div>
-  </div>
-
   <div class="container">
-    <spline-viewer loading-anim-type="spinner-big-dark" url="https://prod.spline.design/gVXZM4Safj3v7i6k/scene.splinecode"></spline-viewer>
-
-    <!-- Add Note button -->
-    <button class="add-note-button" onclick="openPopup()"></button>
+    <spline-viewer url="https://prod.spline.design/UZTR7VFtRS7tfdoU/scene.splinecode"></spline-viewer>
 
     <!-- Popup -->
     <div id="popup">
@@ -99,3 +67,9 @@
   </div>
 </body>
 </html>
+
+
+
+
+
+
